@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Soluções para Sistema 24h — Suporte imediato em programação e infra</title>
+    <meta name="description" content="Suporte 24h em Java/Spring Boot, PHP/Laravel, Node.js/Fastify e infraestrutura (Docker/Cloud). Também criamos produtos: landing pages, automações, integrações WhatsApp, APIs e dashboards." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Favicon SVG idêntico ao ícone do header -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%234F46E5'/%3E%3Cstop offset='100%25' stop-color='%2310B981'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='24' cy='24' r='22' fill='url(%23g1)' opacity='0.15'/%3E%3Cpath d='M26 4L10 28h11l-1 16 14-24H22l4-16z' fill='%234F46E5'/%3E%3C/svg%3E" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: {
+                primary: '#4F46E5',
+                accent: '#10B981',
+                warn: '#F59E0B',
+                error: '#EF4444',
+                muted: '#64748B'
+              }
+            },
+            boxShadow: {
+              card: '0 1px 3px rgba(2,6,23,.15), 0 4px 10px rgba(2,6,23,.08)'
+            },
+            borderRadius: { xl2: '1rem' }
+          }
+        }
+      }
+    </script>
+    <style>
+      :root { color-scheme: light; }
+      html, body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji'; }
+      .focus-ring { outline: none; box-shadow: 0 0 0 3px rgba(79,70,229,.3); }
+    </style>
+  </head>
+  <body class="antialiased text-neutral-900">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-neutral-100">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex h-16 items-center justify-between">
+          <a href="#hero" class="flex items-center gap-3">
+            <span class="inline-flex h-9 w-9 items-center justify-center rounded-xl shadow-card">
+              <svg viewBox="0 0 48 48" class="h-9 w-9" aria-hidden="true">
+                <defs>
+                  <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#4F46E5"/>
+                    <stop offset="100%" stop-color="#10B981"/>
+                  </linearGradient>
+                </defs>
+                <circle cx="24" cy="24" r="22" fill="url(#g1)" opacity="0.15"/>
+                <path d="M26 4L10 28h11l-1 16 14-24H22l4-16z" fill="#4F46E5"/>
+              </svg>
+            </span>
+            <div class="font-semibold tracking-tight">Soluções para Sistema <span class="text-brand-primary">24h</span></div>
+          </a>
+          <nav class="hidden md:flex items-center gap-7 text-sm text-neutral-700">
+            <a href="#solucoes" class="hover:text-neutral-900">Soluções</a>
+            <a href="#produtos" class="hover:text-neutral-900">Produtos</a>
+            <a href="#como-funciona" class="hover:text-neutral-900">Como funciona</a>
+            <a href="#precos" class="hover:text-neutral-900">Planos</a>
+            <a href="#faq" class="hover:text-neutral-900">FAQ</a>
+          </nav>
+          <div class="hidden md:flex items-center gap-3">
+            <a href="#contato" class="inline-flex items-center rounded-full border border-neutral-200 px-4 py-2 text-sm font-medium hover:bg-neutral-50">Contato</a>
+            <a href="https://wa.me/5599999999999?text=Quero%20ajuda%20agora%20com%20meu%20sistema" target="_blank" class="inline-flex items-center gap-2 rounded-full bg-brand-primary px-4 py-2 text-sm font-semibold text-white shadow-card hover:opacity-95">Falar agora</a>
+          </div>
+          <button id="menuBtn" class="md:hidden inline-flex items-center justify-center rounded-lg p-2 hover:bg-neutral-100" aria-label="Abrir menu">
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+          </button>
+        </div>
+        <div id="mobileNav" class="md:hidden hidden border-t border-neutral-100 py-3">
+          <nav class="grid gap-2 text-sm">
+            <a href="#solucoes" class="px-2 py-2 rounded-lg hover:bg-neutral-50">Soluções</a>
+            <a href="#produtos" class="px-2 py-2 rounded-lg hover:bg-neutral-50">Produtos</a>
+            <a href="#como-funciona" class="px-2 py-2 rounded-lg hover:bg-neutral-50">Como funciona</a>
+            <a href="#precos" class="px-2 py-2 rounded-lg hover:bg-neutral-50">Planos</a>
+            <a href="#faq" class="px-2 py-2 rounded-lg hover:bg-neutral-50">FAQ</a>
+            <a href="#contato" class="px-2 py-2 rounded-lg hover:bg-neutral-50">Contato</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="hero" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-24">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <h1 class="text-3xl sm:text-5xl font-semibold tracking-tight text-neutral-900">Se o seu sistema parou, nós colocamos para rodar — <span class="text-brand-primary">24h/dia</span></h1>
+            <p class="mt-5 text-lg text-neutral-700 max-w-2xl">
+              Atendimento imediato para <strong>Java (Spring Boot)</strong>, <strong>PHP (Laravel)</strong>, <strong>Node.js (Fastify/Nest)</strong> e <strong>infra</strong> (Docker, Cloud).
+              <strong> Não é só manutenção:</strong> também <strong>programamos</strong> e <strong>criamos produtos</strong> — landing pages, automações, integrações WhatsApp, APIs e dashboards.
+            </p>
+            <div class="mt-8 flex flex-col sm:flex-row gap-3">
+              <a href="https://wa.me/5599999999999?text=Preciso%20de%20ajuda%20agora" target="_blank" class="inline-flex items-center justify-center rounded-full bg-brand-primary px-6 py-3 text-white font-semibold shadow-card hover:opacity-95">Chamar no WhatsApp</a>
+              <a href="#precos" class="inline-flex items-center justify-center rounded-full border border-neutral-200 px-6 py-3 font-semibold hover:bg-neutral-50">Ver modelos</a>
+            </div>
+            <div class="mt-6 flex items-center gap-6 text-sm text-neutral-600">
+              <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-accent"></span> SLA resposta ~15min (plantão)</div>
+              <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-primary"></span> Stacks: Java, PHP, Node</div>
+              <div class="flex items-center gap-2"><span class="h-2 w-2 rounded-full bg-brand-warn"></span> Custo sob controle</div>
+            </div>
+          </div>
+          <div class="relative">
+            <div class="rounded-2xl shadow-card p-6 bg-white">
+              <div class="grid grid-cols-12 gap-3">
+                <div class="col-span-12 flex gap-2">
+                  <span class="h-3 w-3 rounded-full bg-brand-error"></span>
+                  <span class="h-3 w-3 rounded-full bg-brand-warn"></span>
+                  <span class="h-3 w-3 rounded-full bg-brand-accent"></span>
+                </div>
+                <div class="col-span-12 h-36 rounded-xl bg-gradient-to-br from-neutral-50 to-neutral-100"></div>
+                <div class="col-span-12 grid grid-cols-3 gap-3">
+                  <div class="h-24 rounded-xl bg-neutral-50"></div>
+                  <div class="h-24 rounded-xl bg-neutral-50"></div>
+                  <div class="h-24 rounded-xl bg-neutral-50"></div>
+                </div>
+              </div>
+            </div>
+            <div class="absolute -bottom-6 -right-6 hidden sm:block">
+              <div class="rounded-xl bg-white shadow-card px-4 py-3">
+                <p class="text-sm font-medium">Status: <span class="text-brand-accent">Online</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Soluções -->
+    <section id="solucoes" class="bg-neutral-50">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid lg:grid-cols-12 gap-10 items-start">
+          <div class="lg:col-span-5">
+            <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Problemas que resolvemos</h2>
+            <p class="mt-3 text-neutral-700">Infra + código. Rápido, direto ao ponto, sem burocracia.</p>
+          </div>
+          <div class="lg:col-span-7 grid sm:grid-cols-2 gap-4">
+            <div class="rounded-xl bg-white p-5 shadow-card">
+              <div class="font-medium">Faturas de servidor altíssimas</div>
+              <p class="mt-1 text-sm text-neutral-600">Otimização de instâncias, storage, CDN e DB. Ações rápidas para cortar custos.</p>
+            </div>
+            <div class="rounded-xl bg-white p-5 shadow-card">
+              <div class="font-medium">Servidores caindo</div>
+              <p class="mt-1 text-sm text-neutral-600">Observabilidade, auto-restart, limites, retry e circuit breakers.</p>
+            </div>
+            <div class="rounded-xl bg-white p-5 shadow-card">
+              <div class="font-medium">Projetos que não buildam</div>
+              <p class="mt-1 text-sm text-neutral-600">CI/CD, dependências quebradas em Node/Java/PHP — resolvemos.</p>
+            </div>
+            <div class="rounded-xl bg-white p-5 shadow-card">
+              <div class="font-medium">Bugs críticos em produção</div>
+              <p class="mt-1 text-sm text-neutral-600">Rollback/Hotfix, feature flags, logs/monitoramento e análise de causa.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Produtos -->
+    <section id="produtos" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Produtos e soluções que entregamos</h2>
+        <p class="mt-2 text-neutral-700 max-w-2xl">Além de apagar incêndios, construímos o que seu negócio precisa para crescer.</p>
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+          <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
+            <div class="font-medium">Landing Pages de alta conversão</div>
+            <p class="mt-2 text-sm text-neutral-700">Design rápido, SEO básico, formulários e integração com WhatsApp/Pixel.</p>
+          </div>
+          <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
+            <div class="font-medium">Automações & Integrações WhatsApp</div>
+            <p class="mt-2 text-sm text-neutral-700">Webhooks, chatbots, funis, disparos transacionais e CRM.</p>
+          </div>
+          <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
+            <div class="font-medium">APIs & Integrações</div>
+            <p class="mt-2 text-sm text-neutral-700">Laravel, Spring Boot e Fastify. Autenticação, versionamento e observabilidade.</p>
+          </div>
+          <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
+            <div class="font-medium">Dashboards & Monitoramento</div>
+            <p class="mt-2 text-sm text-neutral-700">Métricas de negócio e técnicas. Grafana/Prometheus/ELK.</p>
+          </div>
+          <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
+            <div class="font-medium">Otimização de Build & CI/CD</div>
+            <p class="mt-2 text-sm text-neutral-700">Pipelines com GitHub Actions/GitLab CI, cache, testes e rollback.</p>
+          </div>
+          <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
+            <div class="font-medium">Bots, Workers & Filas</div>
+            <p class="mt-2 text-sm text-neutral-700">BullMQ, SQS, RabbitMQ — jobs confiáveis e escaláveis.</p>
+          </div>
+        </div>
+        <div class="mt-8">
+          <a href="#contato" class="inline-flex items-center justify-center rounded-full bg-brand-primary px-6 py-3 text-white font-semibold shadow-card hover:opacity-95">Quero discutir um produto</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Como funciona -->
+    <section id="como-funciona" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Como funciona</h2>
+        <div class="mt-8 grid md:grid-cols-4 gap-4">
+          <div class="rounded-xl border border-neutral-200 p-5">
+            <div class="text-sm text-neutral-600">Step 1</div>
+            <div class="mt-1 font-medium">Chame no WhatsApp</div>
+            <p class="mt-2 text-sm text-neutral-600">Envie um resumo do problema (logs/prints ajudam).</p>
+          </div>
+          <div class="rounded-xl border border-neutral-200 p-5">
+            <div class="text-sm text-neutral-600">Step 2</div>
+            <div class="mt-1 font-medium">Diagnóstico imediato</div>
+            <p class="mt-2 text-sm text-neutral-600">Conectamos, medimos e definimos plano de ação.</p>
+          </div>
+          <div class="rounded-xl border border-neutral-200 p-5">
+            <div class="text-sm text-neutral-600">Step 3</div>
+            <div class="mt-1 font-medium">Mão na massa</div>
+            <p class="mt-2 text-sm text-neutral-600">Hands-on até estabilizar. Comunicação contínua.</p>
+          </div>
+          <div class="rounded-xl border border-neutral-200 p-5">
+            <div class="text-sm text-neutral-600">Step 4</div>
+            <div class="mt-1 font-medium">Prevenção</div>
+            <p class="mt-2 text-sm text-neutral-600">Checklist + melhorias para evitar recorrência.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modelos de contratação (sob demanda) -->
+    <section id="precos" class="bg-neutral-50">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div class="flex items-end justify-between gap-6">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Modelos de contratação</h2>
+            <p class="mt-2 text-neutral-700">Trabalho sob demanda. Cada incidente é único, o valor varia conforme escopo e urgência.</p>
+          </div>
+          <div class="text-sm text-neutral-600">Sem letra miúda. Você aprova antes de começarmos.</div>
+        </div>
+
+        <div class="mt-8 grid md:grid-cols-3 gap-6">
+          <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
+            <div class="text-sm font-medium text-brand-muted">Sob Demanda</div>
+            <div class="mt-2 text-2xl font-semibold">Orçamento rápido</div>
+            <ul class="mt-4 space-y-2 text-sm text-neutral-700">
+              <li>Diagnóstico imediato</li>
+              <li>Estimativa por complexidade e tempo</li>
+              <li>Pagamento por incidente resolvido</li>
+            </ul>
+            <a href="https://wa.me/5599999999999?text=Quero%20um%20or%C3%A7amento%20sob%20demanda" target="_blank" class="mt-6 inline-flex w-full items-center justify-center rounded-full bg-brand-primary px-4 py-2 font-semibold text-white hover:opacity-95">Pedir orçamento</a>
+          </div>
+
+          <div class="relative rounded-2xl border-2 border-brand-primary bg-white p-6 shadow-card">
+            <div class="absolute -top-3 right-6 rounded-full bg-brand-primary px-3 py-1 text-xs font-semibold text-white">Mais pedido</div>
+            <div class="text-sm font-medium text-brand-muted">Pacote de Horas</div>
+            <div class="mt-2 text-2xl font-semibold">Flexível</div>
+            <ul class="mt-4 space-y-2 text-sm text-neutral-700">
+              <li>Banco de horas pré-pago</li>
+              <li>Prioridade no atendimento</li>
+              <li>Relatórios de uso e resultados</li>
+            </ul>
+            <a href="https://wa.me/5599999999999?text=Quero%20saber%20sobre%20pacote%20de%20horas" target="_blank" class="mt-6 inline-flex w-full items-center justify-center rounded-full bg-brand-primary px-4 py-2 font-semibold text-white hover:opacity-95">Falar sobre pacotes</a>
+          </div>
+
+          <div class="rounded-2xl border border-neutral-200 bg-white p-6 shadow-card">
+            <div class="text-sm font-medium text-brand-muted">Plantão Sob Medida</div>
+            <div class="mt-2 text-2xl font-semibold">Sob consulta</div>
+            <ul class="mt-4 space-y-2 text-sm text-neutral-700">
+              <li>Disponibilidade acordada (SLA)</li>
+              <li>Runbooks, observabilidade e melhorias</li>
+              <li>Integra com seu time e processos</li>
+            </ul>
+            <a href="https://wa.me/5599999999999?text=Quero%20um%20plant%C3%A3o%20sob%20medida" target="_blank" class="mt-6 inline-flex w-full items-center justify-center rounded-full border border-neutral-200 px-4 py-2 font-semibold hover:bg-neutral-50">Marcar conversa</a>
+          </div>
+        </div>
+
+        <div class="mt-10 rounded-xl border border-dashed border-neutral-300 p-5 text-sm text-neutral-700">
+          <div class="font-medium">Como precificamos</div>
+          <p class="mt-1">Consideramos impacto, urgência, complexidade e tempo estimado. Sempre enviamos uma estimativa antes de iniciar. Se preferir, começamos por um diagnóstico curto e você decide se seguimos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="bg-neutral-50">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid lg:grid-cols-2 gap-10 items-start">
+          <div>
+            <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Fale com a gente agora</h2>
+            <p class="mt-2 text-neutral-700">Prefer WhatsApp? Clique no botão ao lado e escreva “Help!”.</p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="https://wa.me/5599999999999?text=Help!%20Meu%20sistema%20parou" target="_blank" class="inline-flex items-center gap-2 rounded-full bg-brand-accent px-6 py-3 text-white font-semibold shadow-card hover:opacity-95">Abrir WhatsApp</a>
+              <a href="mailto:contato@seusite.com" class="inline-flex items-center gap-2 rounded-full border border-neutral-200 px-6 py-3 font-semibold hover:bg-neutral-50">contato@seusite.com</a>
+            </div>
+            <ul class="mt-8 space-y-2 text-sm text-neutral-700">
+              <li>• Cobertura 24/7</li>
+              <li>• NDA sob solicitação</li>
+              <li>• Segurança: acesso mínimo necessário</li>
+            </ul>
+          </div>
+          <form class="rounded-2xl bg-white p-6 shadow-card border border-neutral-200" onsubmit="event.preventDefault(); alert('Obrigado! Entraremos em contato.'); this.reset();">
+            <div class="grid gap-4">
+              <label class="grid gap-1">
+                <span class="text-sm font-medium">Nome</span>
+                <input type="text" required class="rounded-xl border border-neutral-300 px-3 py-2 focus-ring" placeholder="Seu nome" />
+              </label>
+              <label class="grid gap-1">
+                <span class="text-sm font-medium">E-mail</span>
+                <input type="email" required class="rounded-xl border border-neutral-300 px-3 py-2 focus-ring" placeholder="voce@email.com" />
+              </label>
+              <label class="grid gap-1">
+                <span class="text-sm font-medium">WhatsApp</span>
+                <input type="tel" required class="rounded-xl border border-neutral-300 px-3 py-2 focus-ring" placeholder="(DDD) 90000-0000" />
+              </label>
+              <label class="grid gap-1">
+                <span class="text-sm font-medium">Descreva o problema</span>
+                <textarea required rows="5" class="rounded-xl border border-neutral-300 px-3 py-2 focus-ring" placeholder="Logs, prints, contexto…"></textarea>
+              </label>
+              <button class="mt-2 inline-flex items-center justify-center rounded-full bg-brand-primary px-5 py-3 text-white font-semibold hover:opacity-95" type="submit">Pedir diagnóstico</button>
+              <p class="text-xs text-neutral-500">Ao enviar, você concorda com contato para atendimento técnico.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="bg-white">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+        <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight">Perguntas frequentes</h2>
+        <div class="mt-8 grid md:grid-cols-2 gap-6">
+          <details class="rounded-xl border border-neutral-200 p-5 open:shadow-card">
+            <summary class="cursor-pointer font-medium">Quanto tempo para uma resposta?</summary>
+            <p class="mt-2 text-neutral-700">Em média 15 minutos no plano 24h. On-Demand é atendido na ordem de chegada.</p>
+          </details>
+          <details class="rounded-xl border border-neutral-200 p-5 open:shadow-card">
+            <summary class="cursor-pointer font-medium">Quais stacks vocês atendem?</summary>
+            <p class="mt-2 text-neutral-700">Java/Spring Boot, PHP/Laravel, Node.js (Fastify/Nest), bancos SQL/NoSQL, Docker/K8s e cloud.</p>
+          </details>
+          <details class="rounded-xl border border-neutral-200 p-5 open:shadow-card">
+            <summary class="cursor-pointer font-medium">Como é o acesso ao ambiente?</summary>
+            <p class="mt-2 text-neutral-700">Credenciais temporárias, menor privilégio possível e tudo registrado.</p>
+          </details>
+          <details class="rounded-xl border border-neutral-200 p-5 open:shadow-card">
+            <summary class="cursor-pointer font-medium">Emitimos nota?</summary>
+            <p class="mt-2 text-neutral-700">Sim, PJ com emissão de NF-e.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-neutral-50 border-t border-neutral-200">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div class="flex items-center gap-3">
+            <svg viewBox="0 0 48 48" class="h-7 w-7" aria-hidden="true">
+              <defs>
+                <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#4F46E5"/>
+                  <stop offset="100%" stop-color="#10B981"/>
+                </linearGradient>
+              </defs>
+              <circle cx="24" cy="24" r="22" fill="url(#g2)" opacity="0.15"/>
+              <path d="M26 4L10 28h11l-1 16 14-24H22l4-16z" fill="#4F46E5"/>
+            </svg>
+            <div class="font-semibold">Soluções para Sistema 24h</div>
+          </div>
+          <nav class="text-sm text-neutral-600 flex gap-5">
+            <a href="#solucoes" class="hover:text-neutral-900">Soluções</a>
+            <a href="#precos" class="hover:text-neutral-900">Planos</a>
+            <a href="#faq" class="hover:text-neutral-900">FAQ</a>
+            <a href="#contato" class="hover:text-neutral-900">Contato</a>
+          </nav>
+        </div>
+        <div class="mt-6 text-xs text-neutral-500">© <span id="year"></span> Soluções para Sistema 24h. Todos os direitos reservados.</div>
+      </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/5599999999999?text=Preciso%20de%20ajuda%20agora" target="_blank" class="fixed bottom-6 right-6 inline-flex items-center gap-2 rounded-full bg-brand-accent px-5 py-3 text-white font-semibold shadow-card hover:opacity-95">WhatsApp 24h</a>
+
+    <script>
+      const menuBtn = document.getElementById('menuBtn');
+      const mobileNav = document.getElementById('mobileNav');
+      if (menuBtn) menuBtn.addEventListener('click', () => mobileNav.classList.toggle('hidden'));
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
