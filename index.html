@@ -436,7 +436,7 @@
           const footer = document.querySelector('footer');
           if (btn && footer) {
             const base = parseFloat(getComputedStyle(btn).bottom) || 24;
-            const GAP = 16;
+            const GAP = -20;
             let ticking = false;
             const update = () => {
               const f = footer.getBoundingClientRect();
