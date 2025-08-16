@@ -392,8 +392,12 @@
       </div>
     </footer>
 
-    <a href="https://wa.me/5599999999999?text=Preciso%20de%20ajuda%20agora" target="_blank" class="fixed bottom-6 right-6 inline-flex items-center gap-2 rounded-full bg-brand-accent px-5 py-3 text-white font-semibold shadow-card hover:opacity-95 transition-transform hover:-translate-y-0.5 animate-bounce">WhatsApp 24h</a>
-
+    <a id="whappBtn"
+      href="https://wa.me/5599999999999?text=Preciso%20de%20ajuda%20agora"
+      target="_blank"
+      class="fixed bottom-6 right-6 inline-flex items-center gap-2 rounded-full bg-brand-accent px-5 py-3 text-white font-semibold shadow-card hover:opacity-95 transition-all duration-300 ease-out hover:-translate-y-0.5 animate-bounce">
+      WhatsApp 24h
+    </a>
     <script>
       (function () {
         try {
@@ -427,10 +431,34 @@
             });
           }, { threshold: 0.14 });
           els.forEach(el => io.observe(el));
+
+          const btn = document.getElementById('whappBtn');
+          const footer = document.querySelector('footer');
+          if (btn && footer) {
+            const base = parseFloat(getComputedStyle(btn).bottom) || 24;
+            const GAP = 16;
+            let ticking = false;
+            const update = () => {
+              const f = footer.getBoundingClientRect();
+              const overlap = Math.max(0, window.innerHeight - f.top);
+              const push = overlap > 0 ? overlap + GAP : 0;
+              btn.style.bottom = (base + push) + 'px';
+            };
+            const onScroll = () => {
+              if (!ticking) {
+                requestAnimationFrame(() => { update(); ticking = false; });
+                ticking = true;
+              }
+            };
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', update);
+            update();
+          }
         } catch (err) {
           document.querySelectorAll('.reveal').forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
         }
       })();
-    </script>
+      </script>
+
   </body>
 </html>
